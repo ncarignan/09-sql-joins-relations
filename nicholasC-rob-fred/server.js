@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
 // DONE: Don't forget to set your own conString.
-const conString = 'postgres:Nc122095//localhost:5432';
+const conString = 'postgres://postgres:Nc122095@localhost:5432/postgres';
 
 const client = new pg.Client(conString);
 client.connect();
@@ -103,7 +103,7 @@ app.put('/articles/:id', function(request, response) {
     // DONE: In the provided array, add the required values from the request as data for the SQL query to interpolate.
       client.query(
         `UPDATE articles
-        SET author_id = $1, title = $2, catagory = $3, "publishedOn" = $4, body = $5
+        SET author_id = $1, title = $2, category = $3, "publishedOn" = $4, body = $5
         WHERE article_id = $6`,
         [request.body.author_id, request.body.title, request.body.catagory, request.body.publishedOn, request.body.body, request.params.id]
       )

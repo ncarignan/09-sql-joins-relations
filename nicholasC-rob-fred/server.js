@@ -90,11 +90,13 @@ app.post('/articles', (request, response) => {
 });
 
 app.put('/articles/:id', function(request, response) {
-  // TODO: Write a SQL query to update an author record. Remember that our articles now have an author_id property, so we can reference it from the request.body.
-  // TODO: In the provided array, add the required values from the request as data for the SQL query to interpolate.
+  // DONE: Write a SQL query to update an author record. Remember that our articles now have an author_id property, so we can reference it from the request.body.
+  // DONE: In the provided array, add the required values from the request as data for the SQL query to interpolate.
   client.query(
-    ``,
-    []
+    `UPDATE authors
+    SET author = $1, "authorUrl" = $2
+    WHERE author_id = $3`,
+    [request.body.author, request.body.authorUrl, request.body.author_id]
   )
     .then(() => {
     // TODO: Write a SQL query to update an article record. Keep in mind that article records now have an author_id, in addition to title, category, publishedOn, and body.

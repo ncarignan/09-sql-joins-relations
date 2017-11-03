@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const app = express();
 // DONE: Don't forget to set your own conString.
-const conString = 'postgres://postgres:Nc122095@localhost:5432/postgres';
+const conString = 'postgres://localhost:5432';
+
 const client = new pg.Client(conString);
 client.connect();
 client.on('error', error => {
@@ -18,14 +19,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
-// REVIEW: These are routes for requesting HTML resources.
+// REVIEWED: These are routes for requesting HTML resources.
 app.get('/new', (request, response) => {
   response.sendFile('new.html', {root: './public'});
 });
 
-// REVIEW: These are routes for making API calls to enact CRUD operations on our database.
+// REVIEWED: These are routes for making API calls to enact CRUD operations on our database.
 app.get('/articles', (request, response) => {
-  // REVIEW: This query will join the data together from our tables and send it back to the client.
+  // REVIEWED: This query will join the data together from our tables and send it back to the client.
   // DONE: Write a SQL query which joins all data from articles and authors tables on the author_id value of each.
   client.query(
     `SELECT * FROM articles
@@ -40,24 +41,24 @@ app.get('/articles', (request, response) => {
 });
 
 app.post('/articles', (request, response) => {
-  // TODO: Write a SQL query to insert a new author, ON CONFLICT DO NOTHING.
-  // TODO: In the provided array, add the author and "authorUrl" as data for the SQL query.
+  // DONE: Write a SQL query to insert a new author, ON CONFLICT DO NOTHING.
+  // DONE: In the provided array, add the author and "authorUrl" as data for the SQL query.
   client.query(
     `INSERT INTO authors
     (author, "authorUrl")
     VALUES ($1, $2)
-     ON CONFLICT DO NOTHING`,
+    ON CONFLICT DO NOTHING`,
     [request.body.author, request.body.authorUrl],
     function(err) {
       if (err) console.error(err);
-      // REVIEW: This is our second query, to be executed when this first query is complete.
+      // REVIEWED: This is our second query, to be executed when this first query is complete.
       queryTwo();
     }
   )
 
   function queryTwo() {
-    // TODO: Write a SQL query to retrieve the author_id from the authors table for the new article.
-    // TODO: In the provided array, add the author name as data for the SQL query.
+    // DONE: Write a SQL query to retrieve the author_id from the authors table for the new article.
+    // DONE: In the provided array, add the author name as data for the SQL query.
     client.query(
       `SELECT author_id
       FROM authors
@@ -66,18 +67,20 @@ app.post('/articles', (request, response) => {
       function(err, result) {
         if (err) console.error(err);
 
-        // REVIEW: This is our third query, to be executed when the second is complete. We are also passing the author_id into our third query.
+        // REVIEWED: This is our third query, to be executed when the second is complete. We are also passing the author_id into our third query.
         queryThree(result.rows[0].author_id);
       }
     )
   }
 
   function queryThree(author_id) {
-    // TODO: Write a SQL query to insert the new article using the author_id from our previous query.
-    // TODO: In the provided array, add the data from our new article, including the author_id, as data for the SQL query.
+    // DONE: Write a SQL query to insert the new article using the author_id from our previous query.
+    // DONE: In the provided array, add the data from our new article, including the author_id, as data for the SQL query.
     client.query(
-      ``,
-      [],
+      `INSERT INTO articles
+      (author_id, title, category, "publishedOn", body)
+      VALUES ($1, $2, $3, $4, $5)`,
+      [author_id, request.body.title, request.body.category, request.body.publishedOn, request.body.body],
       function(err) {
         if (err) console.error(err);
         response.send('insert complete');

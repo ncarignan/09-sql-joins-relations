@@ -1,6 +1,6 @@
-**Author**: Nicholas C and Adrian.
-**Previous Collaborations** Nicholas and Rob and Fred and Joel Nicholas C and Fred and Ariel and Joel and Kat and Nicholas and Ariel Joel and Kerry. Nicholas and Joel, Kerry and Joy, Kerry and Kat, Kerry and Joel, Kerry and Seth, NicholasC and Jerry, Adrian and matt L and Fred, Adrian and Garret, Adrian and nickg, jeffk, Adrian and katherine, Adrian and Jeffm
-**Version**: 1.8.2 (increment the patch/fix version number up if you make more commits past your first submission)
+**Author**: Nicholas C and Rob and Jeff.
+**Previous Collaborations** Nicholas and Rob and Fred and Joel Nicholas C and Fred and Ariel and Joel and Kat and Nicholas and Ariel Joel and Kerry. Nicholas and Joel, Kerry and Joy, Kerry and Kat, Kerry and Joel, Kerry and Seth, NicholasC and Jerry, Adrian and matt L and Fred, Adrian and Garret, Adrian and nickg, jeffk, Adrian and katherine, Adrian and Jeffm, Nicholas C and Adrian, Rob doesnt want us to know who he has worked with, Fred and MSI, Fred and Adrian,
+**Version**: 1.9.4 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
 We are building a blog site to the designer's specifications. We were to mirror a few images of the sample site provided by the customer.
@@ -43,6 +43,8 @@ We were given starter code with the html file completed. You would have to layou
 1. initialized the server through node
 1. required pg dependency
 1. Commented on the stack flow of our server functions
+##Day 9
+1. Wrote sql queries for get put and post
 
 ## Architecture
 We used CSS and modified an html file already given to us. We imported a normalized CSS file from https://github.com/necolas/normalize.css/
